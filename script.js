@@ -1,57 +1,53 @@
-const puller = document.getElementById("puller");
 const cover = document.getElementById("cover");
-const rope = document.getElementById("rope");
 
 let startY = 0;
+let currentY = 0;
 let dragging = false;
 
-function startDrag(y){
+function openCover(){
+    cover.style.transform = "translateY(100%)";
+}
+
+document.addEventListener("mousedown", (e)=>{
     dragging = true;
-    startY = y;
-}
-
-function moveDrag(y){
-
-    if(!dragging) return;
-
-    let distance = y - startY; 
-
-    if(distance < 0) distance = 0;
-
-    puller.style.transform =
-        `translateX(-50%) translateY(${distance}px)`;
-
-    rope.style.height = `${180 + distance}px`;
-
-    if(distance > 150){
-        cover.style.transform = "translateY(100%)";
-        dragging = false;
-    }
-}
-
-function endDrag(){
-    dragging = false;
-
-    puller.style.transform = "translateX(-50%)";
-    rope.style.height = "180px";
-}
-
-puller.addEventListener("mousedown", (e)=>{
-    startDrag(e.clientY);
+    startY = e.clientY;
 });
 
 document.addEventListener("mousemove", (e)=>{
-    moveDrag(e.clientY);
+    if(!dragging) return;
+
+    currentY = e.clientY;
+
+    let distance = currentY - startY;
+
+    if(distance > 120){
+        openCover();
+        dragging = false;
+    }
 });
 
-document.addEventListener("mouseup", endDrag);
+document.addEventListener("mouseup", ()=>{
+    dragging = false;
+});
 
-puller.addEventListener("touchstart", (e)=>{
-    startDrag(e.touches[0].clientY);
-}, {passive:true});
+document.addEventListener("touchstart", (e)=>{
+    startY = e.touches[0].clientY;
+    dragging = true;
+});
 
 document.addEventListener("touchmove", (e)=>{
-    moveDrag(e.touches[0].clientY);
-}, {passive:true});
+    if(!dragging) return;
 
-document.addEventListener("touchend", endDrag);
+    currentY = e.touches[0].clientY;
+
+    let distance = currentY - startY;
+
+    if(distance > 120){
+        openCover();
+        dragging = false;
+    }
+});
+
+document.addEventListener("touchend", ()=>{
+    dragging = false;
+});
