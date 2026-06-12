@@ -26,6 +26,8 @@ function moveDrag(y){
     if(distance > 150){
         cover.style.transform = "translateY(100%)";
         dragging = false;
+
+        document.body.classList.add("abierto");
     }
 }
 
@@ -46,7 +48,6 @@ document.addEventListener("mousemove", (e)=>{
 
 document.addEventListener("mouseup", endDrag);
 
-
 puller.addEventListener("touchstart", (e)=>{
     startDrag(e.touches[0].clientY);
 }, {passive:true});
@@ -56,11 +57,3 @@ document.addEventListener("touchmove", (e)=>{
 }, {passive:true});
 
 document.addEventListener("touchend", endDrag);
-
-if(distance > 150){
-    cover.style.transform = "translateY(100%)";
-    dragging = false;
-
-    document.body.style.overflow = "auto";
-    document.body.style.overflowY = "scroll";
-}
