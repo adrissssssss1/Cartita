@@ -13,7 +13,6 @@ body{
     background:#fff7e6;
     font-family:"Trebuchet MS", sans-serif;
     padding:20px;
-    overflow:hidden;
 }
 
 .card{
@@ -196,9 +195,5 @@ p{
 }
 
 #cover{
-    position:fixed;
-    inset:0;
-    background:#fff7e6;
-    z-index:1000;
-    transition:transform 0.8s ease;
+    touch-action: none;
 }
