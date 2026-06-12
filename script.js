@@ -1,24 +1,27 @@
 const cover = document.getElementById("cover");
 
 let startY = 0;
-let currentY = 0;
 let dragging = false;
 
 function openCover(){
     cover.style.transform = "translateY(100%)";
 }
 
-document.addEventListener("mousedown", (e)=>{
+cover.addEventListener("pointerdown", (e)=>{
     dragging = true;
     startY = e.clientY;
 });
 
-document.addEventListener("mousemove", (e)=>{
+cover.addEventListener("pointermove", (e)=>{
+
     if(!dragging) return;
 
-    currentY = e.clientY;
+    let distance = e.clientY - startY;
 
-    let distance = currentY - startY;
+    if(distance < 0) distance = 0;
+
+    // opcional feedback visual suave
+    cover.style.transform = `translateY(${distance * 0.3}px)`;
 
     if(distance > 120){
         openCover();
@@ -26,28 +29,11 @@ document.addEventListener("mousemove", (e)=>{
     }
 });
 
-document.addEventListener("mouseup", ()=>{
+cover.addEventListener("pointerup", ()=>{
     dragging = false;
+    cover.style.transform = "translateY(0)";
 });
 
-document.addEventListener("touchstart", (e)=>{
-    startY = e.touches[0].clientY;
-    dragging = true;
-});
-
-document.addEventListener("touchmove", (e)=>{
-    if(!dragging) return;
-
-    currentY = e.touches[0].clientY;
-
-    let distance = currentY - startY;
-
-    if(distance > 120){
-        openCover();
-        dragging = false;
-    }
-});
-
-document.addEventListener("touchend", ()=>{
+cover.addEventListener("pointercancel", ()=>{
     dragging = false;
 });
