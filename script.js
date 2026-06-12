@@ -1,43 +1,66 @@
+const puller = document.getElementById("puller");
 const cover = document.getElementById("cover");
+const rope = document.getElementById("rope");
 
 let startY = 0;
 let dragging = false;
 
-function openCover(){
-    cover.style.transition = "transform 0.8s ease";
-    cover.style.transform = "translateY(100%)";
+function startDrag(y){
+    dragging = true;
+    startY = y;
 }
 
-cover.addEventListener("pointerdown", (e)=>{
-    dragging = true;
-    startY = e.clientY;
+function moveDrag(y){
 
-    cover.style.transition = "none";
-});
-
-cover.addEventListener("pointermove", (e)=>{
     if(!dragging) return;
 
-    let distance = e.clientY - startY;
+    let distance = y - startY; // 👈 AHORA VA HACIA ABAJO
+
     if(distance < 0) distance = 0;
 
-    cover.style.transform = `translateY(${distance * 0.15}px)`;
+    // mover PNG
+    puller.style.transform =
+        `translateX(-50%) translateY(${distance}px)`;
 
-    if(distance > 120){
+    // estirar cuerda
+    rope.style.height = `${180 + distance}px`;
+
+    // abrir cuando llegue al límite
+    if(distance > 150){
+        cover.style.transform = "translateY(100%)";
         dragging = false;
-        openCover();
     }
-});
+}
 
-cover.addEventListener("pointerup", ()=>{
-    if(!dragging) return;
-
+function endDrag(){
     dragging = false;
 
-    cover.style.transition = "transform 0.5s ease";
-    cover.style.transform = "translateY(0)";
+    puller.style.transform = "translateX(-50%)";
+    rope.style.height = "180px";
+}
+
+/* ------------------ */
+/* PC (mouse) */
+/* ------------------ */
+puller.addEventListener("mousedown", (e)=>{
+    startDrag(e.clientY);
 });
 
-cover.addEventListener("pointercancel", ()=>{
-    dragging = false;
+document.addEventListener("mousemove", (e)=>{
+    moveDrag(e.clientY);
 });
+
+document.addEventListener("mouseup", endDrag);
+
+/* ------------------ */
+/* CELULAR (touch) */
+/* ------------------ */
+puller.addEventListener("touchstart", (e)=>{
+    startDrag(e.touches[0].clientY);
+}, {passive:true});
+
+document.addEventListener("touchmove", (e)=>{
+    moveDrag(e.touches[0].clientY);
+}, {passive:true});
+
+document.addEventListener("touchend", endDrag);
