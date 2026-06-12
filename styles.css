@@ -5,7 +5,7 @@
 }
 
 body{
-    overflow:hidden; /* bloqueado al inicio */
+    overflow:hidden; 
     min-height:100vh;
     background:#fff7e6;
     font-family:"Trebuchet MS", sans-serif;
@@ -27,7 +27,7 @@ body.abierto{
     text-align:center;
     box-shadow:0 10px 30px rgba(0,0,0,.12);
 
-    margin:120px auto; /* más espacio para poder scrollear bien */
+    margin:120px auto;
     font-family:"Trebuchet MS", sans-serif;
 }
 
