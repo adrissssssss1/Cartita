@@ -4,6 +4,14 @@
     box-sizing:border-box;
 }
 
+.card{
+    margin: 40px auto;
+}
+
+body{
+    -webkit-overflow-scrolling: touch;
+}
+
 body{
     overflow:hidden;
     min-height:100vh;
