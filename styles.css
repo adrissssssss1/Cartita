@@ -4,31 +4,34 @@
     box-sizing:border-box;
 }
 
-.card{
-    margin: 40px auto;
-}
-
 body{
-    -webkit-overflow-scrolling: touch;
-}
-
-body{
-    overflow:hidden;
+    overflow:hidden; /* bloqueado al inicio */
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     background:#fff7e6;
     font-family:"Trebuchet MS", sans-serif;
-    padding:20px;
+
+}
+
+body.abierto{
+    overflow-y:auto;
+    height:auto;
 }
 
 .card{
     position:relative;
-    overflow:hidden;
-    font-family: "Trebuchet MS", sans-serif;
+    width:500px;
+    max-width:90vw;
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+    margin:120px auto; /* más espacio para poder scrollear bien */
+    font-family:"Trebuchet MS", sans-serif;
 }
 
+/* emojis */
 .emojislol{
     position:absolute;
     font-size:22px;
@@ -36,25 +39,10 @@ body{
     pointer-events:none;
 }
 
-.star {
-    top:15px;
-    right:20px;
-}
-
-.heart{
-    top:60px;
-    left:20px;
-}
-
-.star2{
-    bottom:30px;
-    right:35px;
-}
-
-.flower{
-    bottom:90px;
-    left:30px;
-}
+.star { top:15px; right:20px; }
+.heart{ top:60px; left:20px; }
+.star2{ bottom:30px; right:35px; }
+.flower{ bottom:90px; left:30px; }
 
 #cover{
     position:fixed;
@@ -62,6 +50,7 @@ body{
     background:#fff7e6;
     z-index:1000;
     transition:transform 1s ease;
+    touch-action:none;
 }
 
 #rope{
@@ -86,16 +75,6 @@ body{
 
 #puller:active{
     cursor:grabbing;
-}
-
-.card{
-    width:500px;
-    max-width:90vw;
-    background:white;
-    border-radius:25px;
-    padding:35px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
 }
 
 h1{
@@ -165,13 +144,8 @@ p{
     top:65px;
 }
 
-.left-eye{
-    left:60px;
-}
-
-.right-eye{
-    right:60px;
-}
+.left-eye{ left:60px; }
+.right-eye{ right:60px; }
 
 .nose{
     position:absolute;
@@ -202,6 +176,6 @@ p{
     z-index:-1;
 }
 
-#cover{
-    touch-action: none;
+html, body{
+    -webkit-overflow-scrolling: touch;
 }
