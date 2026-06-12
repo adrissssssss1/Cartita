@@ -5,6 +5,7 @@
 }
 
 body{
+    overflow:hidden;
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -192,4 +193,12 @@ p{
     left:55px;
     top:130px;
     z-index:-1;
+}
+
+#cover{
+    position:fixed;
+    inset:0;
+    background:#fff7e6;
+    z-index:1000;
+    transition:transform 0.8s ease;
 }
