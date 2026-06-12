@@ -18,6 +18,7 @@ body{
 .card{
     position:relative;
     overflow:hidden;
+    font-family: "Trebuchet MS", sans-serif;
 }
 
 .emojislol{
